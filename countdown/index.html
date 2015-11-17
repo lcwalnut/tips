@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jCountdown倒计时插件(jQuery)</title>
+	<style type="text/css">
+		body{ margin:0px; padding:0px; font-size:14px;}
+		*{ margin:0px; padding:0px;}
+		ul,li,ol{ list-style:none;}
+		a{ color:#000; text-decoration:none}
+		a:hover{color:red; text-decoration:none;}
+		.g-width{width: 1200px;margin: 0 auto;}
+		#act-title{text-align: center;font:2.3em/2.5 \5fae\8f6f\96c5\9ed1;color: #0f8ff1;background-color: #fcfcfc;}
+		#act-info{padding: 3% 0;background-color: #fafafa;}
+		.act-info-i{width: 1200px;margin: 0 auto 3%;background-color: #fff;font:1.5em/2 \5fae\8f6f\96c5\9ed1;}
+		.act-info-i dt{padding: 0 3%;border-bottom: 3px dashed #ececec;color: #333;}
+		.act-info-i dd{padding: 0 3%;border-bottom: 1px solid #f0f0f0;font-size:0.87em;font-weight: normal;color: #858585;}
+		.act-info-i dd h3,.act-info-i dd h4{font-weight: normal;text-transform: uppercase;}
+		pre,.pre{margin:1.5% 0;padding:1em;font-size: 1em;font-family:arial;border: 1px dotted #f2f2f2;background-color: #fdfdfd;}
+		#act-play{padding: 5% 0;text-align: center;}
+		.des{color: #4bdc8c;}
+		.des:before{content:"//";margin-left: 5em;color: #4bdc8c;}
+	</style>
+</head>
+<body>
+<!-- act-title -->
+<h2 id="act-title">jCountdown倒计时插件(jQuery)</h2>
+<!-- act-title end -->
+<!-- act-play -->
+<div id="act-play">
+	<div class="countdown g-width"></div>
+</div>
+<!-- act-play end -->
+<!-- act-info -->
+<div id="act-info">
+	<dl class="act-info-i">
+		<dt>基本信息</dt>
+		<dd><span>描述：</span>倒计时</dd>
+		<dd><span>基于：</span>jquery</dd>
+		<dd><span>浏览器支持：</span>FF、CHROME、SAFARI、IE8及IE8+</dd>
+	</dl>
+	<dl class="act-info-i">
+		<dt>代码引用</dt>
+		<dd>
+			<h3>HTML:</h3>
+			<div class="pre">
+				&lt;div class="countdown"&gt;&lt;/div&gt;
+			</div>
+		</dd>
+		<dd>
+			<h3>css:</h3>
+			<div class="pre">
+				plugin/jcountdown/jcountdown.css
+			</div>
+		</dd>
+		<dd>
+			<h3>script:</h3>
+			<div class="pre">
+				plugin/jcountdown/jquery.jcountdown.min.js
+			</div>
+			<pre>
+$(function(){
+    var b = new Date();<span class="des">获取当前时间</span>
+    var b2 = -b.getTimezoneOffset() / 60;<span class="des">返回当前计算机上的时间和UTC时间相差小时</span>
+    var i = '2016/12/01 00:00:00';<span class="des">设置结束时间</span>
+    var config = {
+        timeText: i, <span class="des">倒计时时间</span>
+        timeZone: b2, <span class="des">时区</span>
+        style: "flip",<span class="des">显示的样式，可选值有flip,slide,metal,crystal</span>
+        color: "white", <span class="des">显示的颜色，可选值white,black</span>
+        width: 0, <span class="des">倒计时宽度</span>
+        textGroupSpace: 15, <span class="des">天、时、分、秒之间间距</span>
+        textSpace: 0, <span class="des">数字之间间距</span>
+        reflection: !0, <span class="des">是否显示倒影</span>
+        reflectionOpacity: 10, <span class="des">倒影透明度</span>
+        reflectionBlur: 0, <span class="des">倒影模糊程度</span>
+        dayTextNumber: 3, <span class="des">倒计时天数数字个数</span>
+        displayDay: !0, <span class="des">是否显示天数</span>
+        displayHour: !0, <span class="des">是否显示小时数</span>
+        displayMinute: !0, <span class="des">是否显示分钟数</span>
+        displaySecond: !0, <span class="des">是否显示分钟数</span>
+        displayLabel: !0, <span class="des">是否显示倒计时底部label</span>
+        onFinish: function() {}<span class="des">倒计时结束后回调执行</span>
+    };
+    $(".countdown").jCountdown(config);<span class="des">调用</span>
+});
+	</pre>
+		</dd>
+	</dl>
+	<dl class="act-info-i">
+		<dt>解题思路：日时分秒倒计时构造（+ 其它） + html构造（+翻页效果）</dt>
+		<dd> </dd>
+		<dd>
+			<h3>构造：</h3>
+			<ul>
+				<li>
+					日时分秒及倒计时实现：<span class="des">jCountdown:B,C,D,E,y</span>
+				</li>
+				<li>
+					插件html结构
+					<span class="des">行:368 if...</span><span class="des">（行:421：c=）</span>
+				</li>
+			</ul>
+		</dd>
+		<dd>
+			<h3>倒计时效果：[js\css]</h3>
+			<ul>
+				<li>js：<span class="des">switch case 判断参数</span></li>
+				<li>翻页：<span class="des">.jCountdown.flip</span></li>
+				<li>滑动：<span class="des">.jCountdown.slide</span></li>
+				<li>隐显：<span class="des">.jCountdown.crystal</span></li>
+				<li>隐显2：<span class="des">.jCountdown.metal</span></li>
+			</ul>
+		</dd>
+		<dd>
+			<h3>其它：</h3>
+			<p>返回：<span class="des">jCountdown: return this</span></p>
+		</dd>
+		<dd>
+			<h3>设置参数：</h3>
+			<p>目前时区：<span class="des">b</span></p>
+			<p>截止时间：<span class="des">i</span></p>
+			<p>参数配置：<span class="des">config</span></p>
+			<p>调用：<span class="des">$(".countdown").jCountdown(config);</span></p>
+		</dd>
+	</dl>
+</div>
+<!-- act-info end -->
+<!-- script -->
+<link rel="stylesheet" href="plugin/jcountdown/jcountdown.css">
+<script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="plugin/jcountdown/jquery.jcountdown.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+    var b = new Date();
+    var b2 = -b.getTimezoneOffset() / 60;
+    var i = '2016/12/01 00:00:00';
+    var config = {
+        timeText: i, 
+        timeZone: b2, 
+        style: "flip", 
+        color: "white", 
+        width: 0, 
+        textGroupSpace: 15, 
+        textSpace: 0,
+        reflection: !0, 
+        reflectionOpacity: 10,
+        reflectionBlur: 0,
+        dayTextNumber: 3,
+        displayDay: !0, 
+        displayHour: !0,
+        displayMinute: !0,
+        displaySecond: !0,
+        displayLabel: !0,
+        onFinish: function() {} 
+    };
+    $(".countdown").jCountdown(config);
+});
+</script>
+<!-- script end -->
+</body>
+</html>

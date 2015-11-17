@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>[学习笔记] - javascript Date()</title>
+	<style type="text/css">
+		body{ margin:0px; padding:0px; font:1em/1.8 \5fae\8f6f\96c5\9ed1;background-color: #fafafa;}
+		*{ margin:0px; padding:0px;}
+		ul,li,ol{ list-style:none;}
+		a{ color:#000; text-decoration:none}
+		a:hover{color:red; text-decoration:none;}
+		pre,.pre{margin: 3% 0;padding: 1em;font-size: 1em;font-family:arial;border: 1px dotted #f2f2f2;background-color: #fdfdfd;}
+		.element .pre{margin:0.5% 0 3%;}
+		.g-width{width: 1200px;margin: 0 auto;}
+		#act-title{text-align: center;font:2.3em/2.5 \5fae\8f6f\96c5\9ed1;color: #0f8ff1;background-color: #fcfcfc;}
+		.act-info{position: relative;left: 0;top: 0;z-index: 10;width: 1200px;margin:3% auto;background-color: #fff;}
+		.title{padding:0 3%;border-bottom: 3px dashed #ececec;color: #666;font-size: 1.5em;line-height: 3;}
+		.ctn{padding:3% 3% 0;border-bottom: 1px solid #f0f0f0;font-weight: normal;color: #858585;}
+		.ctn p{margin-bottom:2%;text-indent: 2em;}
+		/*.act-info-i dd h3{font-weight: normal;text-transform: uppercase;}*/
+		.element{border-bottom: 1px dashed #f6f6f6;padding-bottom: 1%;margin-bottom:1.5%;}
+		.element:last-child{border-bottom:0 none;margin-bottom: 0;}
+		.element dt{border-left:0.5em solid #eee;text-indent: 0.5em;color: #000;margin-bottom: 2%;}
+		.des{color: #858585;font-size: 0.85em;text-indent: 1.2em;margin-bottom:1%;}
+		.result{color: #4bdc8c;}
+		.result:before{content:"//";margin-left: 5em;color: #4bdc8c;}
+		.tips{font-size: 0.8em;color: #f60;text-indent: 1.2em;margin-bottom:1%;}
+		.tips p,.des p{margin: 0;text-indent: 1.2em;}
+		.subtitle{position: absolute;right: 0;top:1.5em;z-index: 13;}
+		.subtitle a{color: #333;padding: 1em 2em;background-color: #D6F5FF;}
+		.subtitle a:hover{color: #fff;background-color: #448AFF;}
+		.footer{text-align: center;line-height:3;color: #858585;}
+	</style>
+</head>
+<body>
+<!-- act-title -->
+<h1 id="act-title">[学习笔记] - javascript Date()</h1>
+<!-- act-title end -->
+<!-- act-info -->
+<section class="act-info g-width">
+	<h2 class="title">前言：</h2>
+	<div class="ctn">
+		<p>原想分享一下版本控制工具-分布式版本控制git，以尽量减少项目开发过程中因为需求更新或代码更新带来的无效开发、重复开发。但是实践和整理以后发现自己对它的认识还有很多不足，所以本周换个话题：温故而知新 - javascript DATE()。</p>
+		<p>Javascript原生对象有Undefined、Null、Object、Boolean、String、Nubmer、Function、Arry、Date、RegExp、Error、Math、JSON</p>
+		<p>其中Object、Boolean、String、Number、Function、Array、Date、RegExp、Error由可以称为构造器。</p>
+		<div class="pre">typeof new Date(); <span class="result">object</span> </div>
+	</div>
+</section>
+<!-- act-info end -->
+<!-- act-info -->
+<section class="act-info g-width">
+	<h2 class="title">方法与实例：</h2>
+	<div class="subtitle">
+		<a href="#t1">创建</a>
+		<a href="#t2">其它</a>
+		<a href="#t3">日期格式化</a>
+		<a href="#t4">获取</a>
+		<a href="#t5">设置</a>
+		<a href="#t5">小案例（整理中...）</a>
+	</div>
+	<div id="t1" class="ctn">
+		<dl class="element">
+			<dt>Date()</dt>
+			<dd class="des">
+				返回当前时间
+			</dd>
+			<dd class="pre code">
+				var a=Date();  console.log(a);
+				<span class="result">Tue Nov 11 2015 19:15:41 GMT+0800 (中国标准时间)</span>
+			</dd>
+		</dl>
+		<dl class="element">
+			<dt>new Date("2015-1-1")</dt>
+			<dd class="des">
+				返回设定时间
+			</dd>
+			<dd class="tips">在调用Date构造函数而不传递参数的情况下，新创建的对象自动获得当前日期和时间。</dd>
+			<dd class="pre code">
+				var myDate = new Date();
+				<span class="result">Sat Jan 01 2015 00:00:00 GMT+0800 (中国标准时间)</span>
+			</dd>
+		</dl>
+	</div>
+	<div id="t2" class="ctn">
+		<dl class="element">
+			<dt>.valueOf()</dt>
+			<dd class="des">
+				从myDate中返回一个月中的某一天 (1 ~ 31)
+			</dd>
+			<dd class="tips">
+				返回像是日期的毫秒数，可以方便使用比较操作符来比较日期值
+			</dd>
+			<dd class="pre code">
+				console.log(myDate.getDate());
+				<span class="result"></span>
+			</dd>
+		</dl>
+		<dl class="element">
+			<dt>Date.parse()</dt>
+			<dd class="des">
+				接受一个表示日期的字符串参数，然后尝试根据这个字符串返回相应的日期的毫秒数
+			</dd>
+			<dd class="tips">
+				<p>方法的行为因实现而异，通常是因地区而异。</p>
+				<p>如果传入此方法的字符串不能表示日期，那么它会返回NAN</p>
+				<p>var someDate = new Date("Mat 25.2004");  等价于 var someDate = new Date(Date.parse("Mat 25.2004"));</p>
+			</dd>
+			<dd class="pre code">
+				console.log(myDate.getDate());
+				<span class="result"></span>
+			</dd>
+		</dl>
+		<dl class="element">
+			<dt>Date.UTC()</dt>
+			<dd class="des">
+				返回表示日期的毫秒数
+			</dd>
+			<dd class="tips">
+				<p>方法的行为因实现而异，通常是因地区而异。</p>
+				<p>参数分别是年份、基于0的月份（一月是0）、月中的那一天（0~31）、分钟、秒 以及毫秒数</p>
+				<p>var someDate = new Date("Mat 25.2004");  等价于 var someDate = new Date(Date.parse("Mat 25.2004"));</p>
+				<p>年和月是必需的 ；天数默认为1， 其他参数默认为0</p>
+			</dd>
+			<dd class="pre code">
+				console.log(myDate.getDate());
+				<span class="result"></span>
+			</dd>
+		</dl>
+		<dl class="element">
+			<dt>Date.now()</dt>
+			<dd class="des">
+				表示调用这个方法时的日期和时间的毫秒数
+			</dd>
+			<dd class="tips">
+				ECMASCRIPT 5 新方法，支持：IE9+\FF3+\SAFARI3+\OPERA 10.5 HE CHROME
+			</dd>
+			<dd class="pre code">
+				console.log(myDate.getDate());
+				<span class="result"></span>
+			</dd>
+		</dl>
+	</div>
+	<div id="t3" class="ctn">
+		<dl class="element">
+			<dt>日期格式</dt>
+			<dd class="tips">
+				<p>各个国家指定的日期格式：</p>
+				<p>美国：MM/DD/YY</p>
+				<p>欧洲：DD/MM/YY</p>
+				<p>中国：YY/MM/DD</p>
+			</dd>
+			<dd class="des">
+				<p>月/日/年：6/13/2013</p>
+				<p>英文月 日,年：January 12，2013</p>
+				<p>英文星期 英文月 日 年 时：分：秒 时区：Tue May 25 20014 00：00：00 GMT-0700</p>
+				<p>ISO 8601扩展格式 YYYY-MM-DDTTHH:mm:ss.sssZ  [只有兼容ECMASCRIPT5的实现支持这种格式]</p>
+			</dd>
+			<dd class="tips">
+				<p>不同浏览器返回，略有差别</p>
+				<img src="datetype.png" alt="不同浏览器返回日期">
+			</dd>
+		</dl>
+		<dl>
+			<dt>.toDateString()</dt>
+			<dd class="des">以特定于实现的格式显示星期几、月、日和年</dd>
+			<div class="tips">日期格式化[有浏览器差异]</div>
+		</dl>
+		<dl>
+			<dt>.toTimeString()</dt>
+			<dd class="des">以特定于实现的格式显示时、分、秒和时区</dd>
+			<div class="tips">日期格式化[有浏览器差异]</div>
+		</dl>
+		<dl>
+			<dt>.toLocaleDateString()</dt>
+			<dd class="des">以特定于地区的格式显示星期几、月、日和年</dd>
+			<div class="tips">日期格式化[有浏览器差异]</div>
+		</dl>
+		<dl>
+			<dt>.toLocaleTimeString()</dt>
+			<dd class="des">以特定于实现的格式完整的显示时、分、秒</dd>
+			<div class="tips">日期格式化[有浏览器差异]</div>
+		</dl>
+		<dl>
+			<dt>.toUTCString()</dt>
+			<dd class="des">以特定于实现的格式完整的UTC日期</dd>
+			<div class="tips">日期格式化[有浏览器差异]</div>
+		</dl>
+		<dl>
+			<dt>.toGMTString()</dt>
+		</dl>
+	</div>
+	<div id="t4" class="ctn">
+		<dl class="element">
+			<dt>.getTime()</dt>
+			<dd class="des">返回<strong>表示日期的毫秒数</strong></dd>
+			<dd class="tips">valueOf()</dd>
+			<dd class="pre code">
+				console.log(myDate.getTime());
+				<span class="result"></span>
+			</dd>
+		</dl>
+		<dl class="element">
+			<dt>.getTimezoneOffset()</dt>
+			<dd class="des">返回当前计算机上的时间和UTC时间相差的分钟数</dd>
+			<dd class="pre code">
+				console.log(myDate.getTime());
+				<span class="result"></span>
+			</dd>
+		</dl>
+		<dl class="element">
+			<dt>.getTimezoneOffset()</dt>
+			<dd class="des">
+				返回本地时间与格林威治标准时间 (GMT) 的分钟差
+			</dd>
+			<dd class="pre code">
+				console.log(myDate.getTimezoneOffset());
+				<span class="result"></span>
+			</dd>
+		</dl>
+		<dl class="element">
+			<dt>.getDate()/.getUTCDate()</dt>
+			<dd class="des">
+				从myDate中返回一个月中的某一天 (1 ~ 31)
+			</dd>
+			<dd class="pre code">
+				console.log(myDate.getDate());
+				<span class="result"></span>
+			</dd>
+		</dl>
+		<dl class="element">
+			<dt>.getDay()/.getUTCDay()</dt>
+			<dd class="des">
+				从myDate中返回一周中的某一天(0-6)
+			</dd>
+			<dd class="pre code">
+				console.log(myDate.getDay());
+				<span class="result"></span>
+			</dd>
+		</dl>
+		<dl class="element">
+			<dt>.getMonth()/.getUTCMonth()</dt>
+			<dd class="des">
+				从myDate中返回月份 (0 ~ 11)
+			</dd>
+			<dd class="pre code">
+				console.log(myDate.getMonth());
+				<span class="result"></span>
+			</dd>
+		</dl>
+		<dl class="element">
+			<dt>.getFullYear()/.getUTCFullYear()</dt>
+			<dd class="des">
+				从myDate中返回年（四位数字）
+			</dd>
+			<dd class="pre code">
+				console.log(myDate.getFullYear());
+				<span class="result"></span>
+			</dd>
+		</dl>
+		<dl class="element">
+			<dt>.getHours()/.getUTCHours()</dt>
+			<dd class="des">
+				从myDate中返回小时 (0 ~ 23)
+			</dd>
+			<dd class="pre code">
+				console.log(myDate.getHours());
+				<span class="result"></span>
+			</dd>
+		</dl>
+		<dl class="element">
+			<dt>.getMinutes()/.getUTCMinutes()</dt>
+			<dd class="des">
+				从myDate中返回分钟 (0 ~ 59)
+			</dd>
+			<dd class="pre code">
+				console.log(myDate.getMinutes());
+				<span class="result"></span>
+			</dd>
+		</dl>
+		<dl class="element">
+			<dt>.getSeconds()/.getUTCSeconds()</dt>
+			<dd class="des">
+				从myDate中返回秒钟 (0 ~ 59)
+			</dd>
+			<dd class="pre code">
+				console.log(myDate.getSeconds());
+				<span class="result"></span>
+			</dd>
+		</dl>
+		<dl class="element">
+			<dt>.getMilliseconds()/.getUTCMilliseconds()</dt>
+			<dd class="des">
+				从myDate中返回毫秒(0 ~ 999)
+			</dd>
+			<dd class="pre code">
+				console.log(myDate.getMilliseconds());
+				<span class="result"></span>
+			</dd>
+		</dl>
+	</div>
+	<div id="t5" class="ctn">
+		<dl class="element">
+			<dt>.setDate()/.setUTCDate();.setMonth()/.setUTCMonth();.setFullYear()/.setUTCFullYear();</dt>
+			<dt>.setHours()/.setUTCHours();.setMinutes()/.setUTCMinutes();.setSeconds()/.setUTCSeconds();.setMilliseconds()/.setUTCMilliseconds()</dt>
+			<dd class="des">
+				设置myDate()为;
+			</dd>
+			<!-- <dd class="pre code">
+				console.log(myDate.getMilliseconds());
+				<span class="result"></span>
+			</dd> -->
+		</dl>
+		<dl class="element">
+			<dt>.setTime(num)</dt>
+			<dd class="des">
+				在myDate上添加num毫秒
+			</dd>
+			<div class="tips">
+				值可以为负
+			</div>
+			<dd class="pre code">
+				console.log(myDate.getMilliseconds());
+				<span class="result"></span>
+			</dd>
+		</dl>
+	</div>
+	<div id="t6" class="ctn">
+		<dl class="element">
+			<dt>今天是星期几？</dt>
+			<dd>
+			<pre>
+var d=new Date()
+var weekday=new Array(7)
+weekday[0]="星期日"
+weekday[1]="星期一"
+weekday[2]="星期二"
+weekday[3]="星期三"
+weekday[4]="星期四"
+weekday[5]="星期五"
+weekday[6]="星期六"
+document.write("今天是" + weekday[d.getDay()])
+			</pre>
+				<div class="result">
+					今天是星期N
+				</div>
+			</dd>
+			<!-- <dd class="pre code">
+				console.log(myDate.getMilliseconds());
+				<span class="result"></span>
+			</dd> -->
+		</dl>
+	</div>
+</section>
+<!-- act-info end -->
+<footer class='footer'>
+	@ccwuyu 201511
+</footer>
+<!-- script -->
+<script>
+</script>
+<!-- script end -->
+</body>
+</html>
